@@ -1,7 +1,7 @@
-﻿namespace UserRoleApi.Models.Dtos
+﻿namespace AddRoleApi.Models.Dtos
 {
-    public class AddRole
+    public class AddRoleDto
     {
-		public string RoleName { get; set; }
-	}
+        public string Name { get; set; }
+    }
 }

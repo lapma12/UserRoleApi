@@ -17,7 +17,7 @@ namespace UserRoleApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewUser(AddRoleDto addUserDto)
+        public async Task<IActionResult> AddNewUser(AddUserDto addUserDto)
         {
             if(addUserDto != null)
             {

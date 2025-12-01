@@ -4,7 +4,7 @@ namespace UserRoleApi.Services.IServices
 {
     public interface IUser
     {
-        Task<object> AddNewUser(AddRoleDto addUserDto);
+        Task<object> AddNewUser(AddUserDto addUserDto);
         Task<object> GetAllUser();
 
         Task<object> GetByIdUser(Guid id);
@@ -12,6 +12,8 @@ namespace UserRoleApi.Services.IServices
         Task<object> DeleteUser(Guid id);
 
         Task<object> UpdateUser(Guid id,UpdateUserDto updateUserDto);
+
+        Task<object> GetAllUsersWithRole();
 
     }
 }

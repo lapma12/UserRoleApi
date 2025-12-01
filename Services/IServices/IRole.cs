@@ -1,4 +1,4 @@
-﻿using UserRoleApi.Models.Dtos;
+﻿using AddRoleApi.Models.Dtos;
 
 namespace UserRoleApi.Services.IServices
 {

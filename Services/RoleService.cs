@@ -1,7 +1,9 @@
-﻿using UserRoleApi.Models;
+﻿using AddRoleApi.Models.Dtos;
+using UserRoleApi.Models;
 using UserRoleApi.Models.Dtos;
+using UserRoleApi.Services.IServices;
 
-namespace UserRoleApi.Services.IServices
+namespace UserRoleApi.Services
 {
     public class RoleService : IRole
     {

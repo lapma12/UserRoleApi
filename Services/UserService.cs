@@ -1,8 +1,10 @@
-﻿using MySqlX.XDevAPI.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Common;
 using UserRoleApi.Models;
 using UserRoleApi.Models.Dtos;
+using UserRoleApi.Services.IServices;
 
-namespace UserRoleApi.Services.IServices
+namespace UserRoleApi.Services
 {
     public class UserService : IUser
     {
@@ -11,19 +13,19 @@ namespace UserRoleApi.Services.IServices
         {
             _context = context;
         }
-        public async Task<object> AddNewUser(AddRoleDto addUserDto)
+        public async Task<object> AddNewUser(AddUserDto addUserDto)
         {
-			try
-			{
+            try
+            {
                 var result = new ResultResponseDto();
                 var user = new User
-				{
+                {
                     Id = Guid.NewGuid(),
                     Name = addUserDto.Name,
                     Email = addUserDto.Email,
                     Password = addUserDto.Password
                 };
-                
+
                 if (user != null)
                 {
                     await _context.Users.AddAsync(user);
@@ -37,7 +39,7 @@ namespace UserRoleApi.Services.IServices
                 return result;
 
             }
-			catch (Exception ex)
+            catch (Exception ex)
             {
                 var result = new ResultResponseDto();
                 result.message = ex.Message;
@@ -80,9 +82,26 @@ namespace UserRoleApi.Services.IServices
             }
         }
 
+        public async Task<object> GetAllUsersWithRole()
+        {
+            try
+            {
+                var result = new ResultResponseDto();
+                result.message = "User with Role list fetched successfully";
+                result.result = await _context.Users.Include(x => x.userRoles).ThenInclude(x => x.Role).Select(x => new {userName = x.Name,userRole = x.userRoles.Select(y => y.Role.Name)})
+                    .ToListAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var result = new ResultResponseDto();
+                result.message = ex.Message;
+                return result;
+            }
+        }
+
         public async Task<object> GetByIdUser(Guid id)
         {
-            
             try
             {
                 var result = new ResultResponseDto();
