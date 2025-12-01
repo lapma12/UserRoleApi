@@ -1,8 +1,10 @@
 using UserRoleApi.Models;
+using UserRoleApi.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<UserDBContext>();
+builder.Services.AddScoped<IUser,UserService>();
 
 // Add services to the container.
 

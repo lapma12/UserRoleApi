@@ -11,7 +11,7 @@ namespace UserRoleApi.Services.IServices
         {
             _context = context;
         }
-        public async Task<object> AddNewUser(AddUserDto addUserDto)
+        public async Task<object> AddNewUser(AddRoleDto addUserDto)
         {
 			try
 			{
@@ -43,6 +43,64 @@ namespace UserRoleApi.Services.IServices
                 result.message = ex.Message;
                 return result;
             }
+        }
+
+        public async Task<object> DeleteUser(Guid id)
+        {
+            try
+            {
+                var result = new ResultResponseDto();
+                result.message = "User deleted successfully";
+                result.result = _context.Users.Remove(_context.Users.FirstOrDefault(_context => _context.Id == id)!);
+                return result;
+
+            }
+            catch (Exception)
+            {
+                var result = new ResultResponseDto();
+                result.message = "User delete is failed";
+                return result;
+            }
+        }
+
+        public async Task<object> GetAllUser()
+        {
+            try
+            {
+                var result = new ResultResponseDto();
+                result.message = "User list fetched successfully";
+                result.result = _context.Users.ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var result = new ResultResponseDto();
+                result.message = ex.Message;
+                return result;
+            }
+        }
+
+        public async Task<object> GetByIdUser(Guid id)
+        {
+            
+            try
+            {
+                var result = new ResultResponseDto();
+                result.message = "User fetched successfully";
+                result.result = _context.Users.FirstOrDefault(_context => _context.Id == id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                var result = new ResultResponseDto();
+                result.message = ex.Message;
+                return result;
+            }
+        }
+
+        public async Task<object> UpdateUser(Guid id, UpdateUserDto updateUserDto)
+        {
+            throw new NotImplementedException();
         }
     }
 }
